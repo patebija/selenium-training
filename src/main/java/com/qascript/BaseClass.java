@@ -3,6 +3,7 @@ package com.qascript;
 import com.qascript.utils.Common.PropertyFileUtils;
 import com.qascript.utils.Selenium.GetDriver;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 public class BaseClass {
@@ -19,7 +20,7 @@ public class BaseClass {
 
     }
 
-    @BeforeSuite
+    @AfterSuite
     public void teardown(){
         GetDriver.closeDriver();
     }

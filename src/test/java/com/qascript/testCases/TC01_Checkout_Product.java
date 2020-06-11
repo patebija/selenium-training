@@ -4,12 +4,15 @@ import com.qascript.BaseClass;
 import com.qascript.pageObjects.HomePage;
 import org.testng.annotations.Test;
 
-public class VerifyAddCart extends BaseClass {
+public class TC01_Checkout_Product extends BaseClass {
 
-    @Test
-    public static void AddProductCart(){
+    @Test (priority = 0)
+    public static void SelectProductAndCheckout(){
         HomePage.enterSearch("Tata Agni Leaf Tea Pouch");
         HomePage.clickAddButton();
-        HomePage.clickCart();
+        HomePage.OpenCart();
+        HomePage.verifyProductNameInCart("Agni Leaf Tea Pouch");
     }
+
+
 }
