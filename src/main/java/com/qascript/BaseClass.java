@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import java.util.concurrent.TimeUnit;
+
 public class BaseClass {
 
     public static WebDriver driver;
@@ -17,6 +19,14 @@ public class BaseClass {
         String url = PropertyFileUtils.loadApplicationProperties().getProperty("application.url");
         driver = GetDriver.initializeDriver(browser);
         driver.get(url);
+        try {
+            synchronized (driver)
+            {
+                driver.wait(3000);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
