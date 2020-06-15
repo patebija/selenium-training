@@ -22,7 +22,7 @@ public class BaseClass {
         try {
             synchronized (driver)
             {
-                driver.wait(3000);
+                driver.wait(4500);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

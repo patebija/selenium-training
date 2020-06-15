@@ -18,6 +18,8 @@ public class LoginPage extends BaseClass {
     public static String txtboxOtp3 = "//input[@class='form-control'][3]";
     public static String txtboxOtp4 = "//input[@class='form-control'][4]";
     public static String btnLogin = "//button[text()=' Login ']";
+    public static String errLogin = "//*[text()='Enter a valid mobile number']";
+
 
     public static void EnterMobileNumber(String strMobileNumber){
         driver.findElement(By.xpath(txtboxMobileNumber)).clear();
@@ -50,13 +52,22 @@ public class LoginPage extends BaseClass {
                 strMobileNumberLabel + "not matching with actual header" + actualLabel);
     }
     public static void EnterOtp(String txtOTP){
-        String OTP1 = txtOTP.substring(0,0);
-        String OTP2 = txtOTP.substring(1,1);
-        String OTP3 = txtOTP.substring(2,2);
-        String OTP4 = txtOTP.substring(3,3);
+        String OTP1 = txtOTP.substring(0,1);
+        String OTP2 = txtOTP.substring(1,2);
+        String OTP3 = txtOTP.substring(2,3);
+        String OTP4 = txtOTP.substring(3,4);
         driver.findElement(By.xpath(txtboxOtp1)).sendKeys(OTP1);
         driver.findElement(By.xpath(txtboxOtp2)).sendKeys(OTP2);
         driver.findElement(By.xpath(txtboxOtp3)).sendKeys(OTP3);
         driver.findElement(By.xpath(txtboxOtp4)).sendKeys(OTP4);
     }
+
+    public static void VerifyErrorMessage(String expectedMessage) {
+        String actualMessage = driver.findElement(By.xpath(errLogin)).getText();
+        Assert.assertTrue(actualMessage.equals(expectedMessage),"Expected error message: " +
+                expectedMessage + "doesn't match with Actual error message: "+ actualMessage);
+
+    }
+
+
 }

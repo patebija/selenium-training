@@ -16,6 +16,11 @@ public class PropertyFileUtils {
         Properties props = loadProperties("src/test/resources/config/framework.properties");
         return props;
     }
+    public static Properties loadUserProperties(){
+        Properties props = loadProperties("user.properties");
+        return props;
+    }
+
 
     public static Properties loadProperties(String filePath){
 
