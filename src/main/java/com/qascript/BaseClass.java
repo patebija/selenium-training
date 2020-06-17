@@ -3,7 +3,9 @@ package com.qascript;
 import com.qascript.utils.Common.PropertyFileUtils;
 import com.qascript.utils.Selenium.GetDriver;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
 import java.util.concurrent.TimeUnit;
@@ -12,7 +14,7 @@ public class BaseClass {
 
     public static WebDriver driver;
 
-    @BeforeSuite
+    @BeforeClass
     public void setup(){
 
         String browser = PropertyFileUtils.loadFrameworkProperties().getProperty("webdriver.driver");
@@ -30,7 +32,7 @@ public class BaseClass {
 
     }
 
-    @AfterSuite
+    @AfterClass
     public void teardown(){
         GetDriver.closeDriver();
     }

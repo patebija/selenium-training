@@ -4,6 +4,7 @@
     <test name="Regression Tests" >
         <classes>
           <class name="com.qascript.testCases.TC01_VerifyLoginUser"></class>
+            <class name="com.qascript.testCases.TC02_VerifyProducts"></class>
         </classes>
     </test>
 

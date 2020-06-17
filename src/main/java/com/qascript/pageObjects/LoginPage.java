@@ -3,7 +3,6 @@ package com.qascript.pageObjects;
 import com.qascript.BaseClass;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-
 import java.util.concurrent.TimeUnit;
 
 public class LoginPage extends BaseClass {
