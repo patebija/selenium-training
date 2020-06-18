@@ -20,7 +20,8 @@ public class HomePage extends BaseClass {
     private static String ddShopByCategory= "//span[text()='Shop by Category']";
     private static String txtCategories = "//a[@id='catTab71-t']";
     private static String txtSubCategories = "//*[@id='catTab71']/a";
-    private static WebElement shopByCategory = driver.findElement(By.xpath("//span[text()='Shop by Category']"));
+    private static WebElement shopByCategory = driver.findElement(By.xpath("(//span[text()='Shop by Category'])[2]"));
+    private static String txtSubCategoriesHeader = "//h2[@class='ng-star-inserted']";
 
 
     public static void clickLogin(){
@@ -55,7 +56,7 @@ public class HomePage extends BaseClass {
         for(WebElement element:allElementCategories){
             Actions actions = new Actions(driver);
             actions.moveToElement(shopByCategory);
-            actions.build().perform();
+            actions.perform();
             element.click();
             allElementSubCategories = driver.findElements(By.xpath(txtSubCategories));
             for(WebElement elements:allElementSubCategories){
@@ -64,6 +65,27 @@ public class HomePage extends BaseClass {
             }
         }
         return allSubCategories;
+    }
+
+    public static void validateEachSubCategory(){
+        List<WebElement> allElementSubCategories;
+        List<WebElement> allElementCategories = driver.findElements(By.xpath(txtCategories));
+        for(WebElement element:allElementCategories){
+            Actions actions = new Actions(driver);
+            actions.moveToElement(shopByCategory);
+            actions.perform();
+            element.click();
+            allElementSubCategories = driver.findElements(By.xpath(txtSubCategories));
+            for(WebElement elements:allElementSubCategories){
+                String txtCategoryMenu= element.getText();
+                String txtSubCategoryMenu = elements.getText();
+                elements.click();
+                String pageHeader = driver.findElement(By.xpath(txtSubCategoriesHeader)).getText();
+                Assert.assertTrue(pageHeader.equals(txtSubCategoryMenu),"Sub-category page header: "+pageHeader+
+                        " is not matching with sub-category text: " + txtSubCategoryMenu);
+            }
+        }
+
     }
 
 

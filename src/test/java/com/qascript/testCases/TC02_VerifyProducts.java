@@ -32,4 +32,12 @@ public class TC02_VerifyProducts extends BaseClass {
                 " don't match with actual product subcategories: " + actualSubCategory);
 
     }
+
+    @Test
+    public void verifySubCategoryLinks(){
+
+        HomePage.validateEachSubCategory();
+
+
+    }
 }
