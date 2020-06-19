@@ -38,6 +38,5 @@ public class TC02_VerifyProducts extends BaseClass {
 
         HomePage.validateEachSubCategory();
 
-
     }
 }
