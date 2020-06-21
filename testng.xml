@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Regression Suite" verbose="1" >
+<suite name="Regression Suite" verbose="1">
     <test name="Regression Tests" >
         <classes>
           <class name="com.qascript.testCases.TC01_VerifyLoginUser"></class>

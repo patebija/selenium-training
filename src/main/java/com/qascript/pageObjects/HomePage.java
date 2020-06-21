@@ -2,15 +2,15 @@ package com.qascript.pageObjects;
 
 import com.qascript.BaseClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class HomePage extends BaseClass {
 
@@ -21,8 +21,14 @@ public class HomePage extends BaseClass {
     private static String ddShopByCategory= "//span[text()='Shop by Category']";
     private static String txtCategories = "//a[@id='catTab71-t']";
     private static String txtSubCategories = "//*[@id='catTab71']/a";
-    private static WebElement shopByCategory = driver.findElement(By.xpath("(//span[text()='Shop by Category'])[2]"));
     private static String txtSubCategoriesHeader = "//h2[@class='ng-star-inserted']";
+    private static String txtbxSearch = "//input[@placeholder='Search our products']";
+    private static String classProductTitle = "//div[@class='str-product-title']";
+    private static String btnAddProduct = "(//p[text()='ADD'])[1]";
+    private static String iconCart = "//i[text()='shopping_cart']";
+    private static String msgOrderSuccess = "//i[@class='material-icons']//following-sibling::p";
+
+    private static WebElement shopByCategory = driver.findElement(By.xpath("(//span[text()='Shop by Category'])[2]"));
 
 
     public static void clickLogin(){
@@ -65,7 +71,7 @@ public class HomePage extends BaseClass {
         List<WebElement> allElementCategories = driver.findElements(By.xpath(txtCategories));
         for(WebElement element:allElementCategories){
             Actions actions = new Actions(driver);
-            actions.moveToElement(shopByCategory);
+           actions.moveToElement(shopByCategory);
             actions.perform();
             element.click();
             allElementSubCategories = driver.findElements(By.xpath(txtSubCategories));
@@ -106,10 +112,36 @@ public class HomePage extends BaseClass {
                 }
 //                JavascriptExecutor js = (JavascriptExecutor)driver;
 //                js.executeScript("arguments[0].scrollIntoView(true);", element);
+                driver.getPageSource();
             }
         }
 
     }
+
+    public static void searchItem(String item){
+        driver.findElement(By.xpath(txtbxSearch)).sendKeys(item);
+        driver.findElement(By.xpath(txtbxSearch)).sendKeys(Keys.ENTER);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+    }
+
+    public static void addProductInCart(String title){
+        List<WebElement> allProducts = driver.findElements(By.xpath(classProductTitle));
+        for(WebElement element:allProducts){
+            String txtProduct = element.getText();
+            if(txtProduct.equals(title)){
+                element.click();
+                driver.findElement(By.xpath(btnAddProduct)).click();
+            }
+
+        }
+    }
+
+    public static void openCart(){
+        driver.findElement(By.xpath(iconCart)).click();
+
+    }
+
 
 
 

@@ -10,8 +10,6 @@ import java.util.List;
 
 public class TC02_VerifyProducts extends BaseClass {
 
-
-
     @Test
     public void verifyAllCategories(){
         ExcelUtils excelUtils = new ExcelUtils("src/test/resources/data/TestData.xlsx");
