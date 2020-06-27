@@ -3,6 +3,8 @@ package com.qascript.utils.Selenium;
 import com.qascript.utils.Common.PropertyFileUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -54,14 +56,14 @@ public class GetDriver {
     private static WebDriver setFirefoxDriver() {
         String firefoxDriverPath = PropertyFileUtils.loadFrameworkProperties().getProperty("webdriver.firefox.driver");
         System.setProperty("webdriver.gecko.driver",firefoxDriverPath);
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         return driver;
     }
 
     private static WebDriver setIEDriver() {
         String ieDriverPath = PropertyFileUtils.loadFrameworkProperties().getProperty("webdriver.ie.driver");
         System.setProperty("webdriver.ie.driver",ieDriverPath);
-        driver = new ChromeDriver();
+        driver = new InternetExplorerDriver();
         return driver;
     }
 

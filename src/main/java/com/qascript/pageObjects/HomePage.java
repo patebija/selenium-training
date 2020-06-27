@@ -1,16 +1,22 @@
 package com.qascript.pageObjects;
 
 import com.qascript.BaseClass;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import com.qascript.utils.Common.PropertyFileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class HomePage extends BaseClass {
 
@@ -18,7 +24,7 @@ public class HomePage extends BaseClass {
     private static String linkLogin = "//span[text()='Login']//ancestor::a[1]";
     private static String linkProfile="//a[@id='profile-drop']";
     private static String linkLogout="//span[text()='Log Out']";
-    private static String ddShopByCategory= "//span[text()='Shop by Category']";
+    private static String ddShopByCategory= "(//span[text()='Shop by Category'])[2]";
     private static String txtCategories = "//a[@id='catTab71-t']";
     private static String txtSubCategories = "//*[@id='catTab71']/a";
     private static String txtSubCategoriesHeader = "//h2[@class='ng-star-inserted']";
@@ -27,6 +33,8 @@ public class HomePage extends BaseClass {
     private static String btnAddProduct = "(//p[text()='ADD'])[1]";
     private static String iconCart = "//i[text()='shopping_cart']";
     private static String msgOrderSuccess = "//i[@class='material-icons']//following-sibling::p";
+    private static String btmProductCategory = "//div[@class='str-categories-card-content']";
+    private static String linkHome = "(//span[text()='Home'])[2]";
 
     private static WebElement shopByCategory = driver.findElement(By.xpath("(//span[text()='Shop by Category'])[2]"));
 
@@ -121,7 +129,7 @@ public class HomePage extends BaseClass {
     public static void searchItem(String item){
         driver.findElement(By.xpath(txtbxSearch)).sendKeys(item);
         driver.findElement(By.xpath(txtbxSearch)).sendKeys(Keys.ENTER);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, SECONDS);
 
     }
 
@@ -140,6 +148,31 @@ public class HomePage extends BaseClass {
     public static void openCart(){
         driver.findElement(By.xpath(iconCart)).click();
 
+    }
+
+    public static void getbottomProduct(){
+        driver.manage().timeouts().implicitlyWait(30, SECONDS);
+       List<WebElement> bottomProducts = driver.findElements(By.xpath(btmProductCategory));
+       for(WebElement element: bottomProducts){
+           WebDriverWait wait = new WebDriverWait(driver,30);
+           wait.until(elementIdentified(By.xpath(btmProductCategory)));
+           element = driver.findElement(By.xpath(btmProductCategory));
+           wait.until(ExpectedConditions.elementToBeClickable(element));
+           element.click();
+           driver.manage().timeouts().implicitlyWait(30, SECONDS);
+           driver.findElement(By.xpath(linkHome)).click();
+
+       }
+
+    }
+
+    private static Function<WebDriver,WebElement> elementIdentified(final By locator) {
+        return new Function<WebDriver, WebElement>() {
+            @Override
+            public WebElement apply(WebDriver driver) {
+                return driver.findElement(locator);
+            }
+        };
     }
 
 

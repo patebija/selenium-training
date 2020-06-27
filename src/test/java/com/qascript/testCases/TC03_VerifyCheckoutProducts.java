@@ -6,10 +6,7 @@ import com.qascript.pageObjects.HomePage;
 import com.qascript.pageObjects.LoginPage;
 import com.qascript.pageObjects.OrderPage;
 import com.qascript.utils.Common.PropertyFileUtils;
-import org.apache.commons.math3.geometry.partitioning.BSPTreeVisitor;
 import org.testng.annotations.Test;
-
-import java.util.Base64;
 
 public class TC03_VerifyCheckoutProducts extends BaseClass {
 

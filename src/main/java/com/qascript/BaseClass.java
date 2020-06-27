@@ -3,21 +3,17 @@ package com.qascript;
 import com.qascript.utils.Common.PropertyFileUtils;
 import com.qascript.utils.Selenium.GetDriver;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
-
-import java.util.concurrent.TimeUnit;
+import org.testng.annotations.*;
 
 public class BaseClass {
 
     public static WebDriver driver;
 
     @BeforeClass
-    public void setup(){
+    @Parameters({"browser"})
+    public void setup(String browser){
 
-        String browser = PropertyFileUtils.loadFrameworkProperties().getProperty("webdriver.driver");
+        //String browser = PropertyFileUtils.loadFrameworkProperties().getProperty("webdriver.driver");
         String url = PropertyFileUtils.loadApplicationProperties().getProperty("application.url");
         driver = GetDriver.initializeDriver(browser);
         driver.get(url);
