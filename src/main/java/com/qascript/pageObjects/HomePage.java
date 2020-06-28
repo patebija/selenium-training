@@ -35,6 +35,7 @@ public class HomePage extends BaseClass {
     private static String msgOrderSuccess = "//i[@class='material-icons']//following-sibling::p";
     private static String btmProductCategory = "//div[@class='str-categories-card-content']";
     private static String linkHome = "(//span[text()='Home'])[2]";
+    private static String btmProductCategroryHeader = "//div[@class='str-categories-card-content']/h3";
 
     private static WebElement shopByCategory = driver.findElement(By.xpath("(//span[text()='Shop by Category'])[2]"));
 
@@ -153,20 +154,27 @@ public class HomePage extends BaseClass {
     public static void getbottomProduct(){
         driver.manage().timeouts().implicitlyWait(30, SECONDS);
        List<WebElement> bottomProducts = driver.findElements(By.xpath(btmProductCategory));
+       int index = 1;
        for(WebElement element: bottomProducts){
            WebDriverWait wait = new WebDriverWait(driver,30);
            wait.until(elementIdentified(By.xpath(btmProductCategory)));
-           element = driver.findElement(By.xpath(btmProductCategory));
+           element = driver.findElement(By.xpath("(" +btmProductCategory + ")" + "[" + index + "]"));
            wait.until(ExpectedConditions.elementToBeClickable(element));
+           String bottomProductsHeader = element.getText();
            element.click();
+           String subcategoryHeader = driver.findElement(By.xpath(txtSubCategoriesHeader)).getText();
+           Assert.assertTrue(bottomProductsHeader.contains(subcategoryHeader),"Bottom category header " + bottomProductsHeader
+           + " is not equal to sub-category header "+ subcategoryHeader);
            driver.manage().timeouts().implicitlyWait(30, SECONDS);
            driver.findElement(By.xpath(linkHome)).click();
+           index++;
+
 
        }
 
     }
 
-    private static Function<WebDriver,WebElement> elementIdentified(final By locator) {
+    private static Function<WebDriver,WebElement> elementIdentified(By locator) {
         return new Function<WebDriver, WebElement>() {
             @Override
             public WebElement apply(WebDriver driver) {
