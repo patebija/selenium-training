@@ -1,6 +1,7 @@
 package com.qascript.pageObjects;
 
 import com.qascript.BaseClass;
+import com.qascript.utils.Common.CommonUtils;
 import com.qascript.utils.Common.PropertyFileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -127,6 +128,10 @@ public class HomePage extends BaseClass {
 
     }
 
+    /**
+     * Method to search an item
+     * @param item - Search Item
+     */
     public static void searchItem(String item){
         driver.findElement(By.xpath(txtbxSearch)).sendKeys(item);
         driver.findElement(By.xpath(txtbxSearch)).sendKeys(Keys.ENTER);
@@ -151,6 +156,10 @@ public class HomePage extends BaseClass {
 
     }
 
+    /**
+     * Get all product categories from the bottom of the page.
+     * Click on each category and verify headers are same.
+     */
     public static void getbottomProduct(){
         driver.manage().timeouts().implicitlyWait(30, SECONDS);
        List<WebElement> bottomProducts = driver.findElements(By.xpath(btmProductCategory));
@@ -165,6 +174,9 @@ public class HomePage extends BaseClass {
            String subcategoryHeader = driver.findElement(By.xpath(txtSubCategoriesHeader)).getText();
            Assert.assertTrue(bottomProductsHeader.contains(subcategoryHeader),"Bottom category header " + bottomProductsHeader
            + " is not equal to sub-category header "+ subcategoryHeader);
+           if(!bottomProductsHeader.contains(subcategoryHeader + "test")){
+               CommonUtils.captureScreenshot("VerifyBottomProducts");
+           }
            driver.manage().timeouts().implicitlyWait(30, SECONDS);
            driver.findElement(By.xpath(linkHome)).click();
            index++;

@@ -9,6 +9,7 @@ public class TC04_VerifyBottomProductCategories extends BaseClass {
     @Test
     public void verifyBottomProducts(){
         HomePage.getbottomProduct();
+
     }
 
 }

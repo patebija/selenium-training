@@ -1,6 +1,7 @@
 package com.qascript.pageObjects;
 
 import com.qascript.BaseClass;
+import com.qascript.utils.Common.CommonUtils;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import java.util.concurrent.TimeUnit;
@@ -23,6 +24,7 @@ public class LoginPage extends BaseClass {
     public static void EnterMobileNumber(String strMobileNumber){
         driver.findElement(By.xpath(txtboxMobileNumber)).clear();
         driver.findElement(By.xpath(txtboxMobileNumber)).sendKeys(strMobileNumber);
+
     }
 
     public static void ClickProceed(){
@@ -43,6 +45,7 @@ public class LoginPage extends BaseClass {
         String actualHeader = driver.findElement(By.xpath(txtLogin)).getText();
         Assert.assertTrue(txtHeader.equals(actualHeader),"Expected header" +
                 txtHeader + "not matching with actual header" + actualHeader);
+
     }
 
     public static void VerifyLabelMobileNumber(String strMobileNumberLabel){
