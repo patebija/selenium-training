@@ -3,6 +3,7 @@
 <suite name="Regression Suite" verbose="1">
 
     <test name="Chrome Tests" >
+        <parameter name="OS" value="Win 10"></parameter>
         <parameter name="browser" value="chrome"></parameter>
         <classes>
           <class name="com.qascript.testCases.TC04_VerifyBottomProductCategories"></class>
@@ -10,6 +11,7 @@
     </test>
 
     <test name="Firefox Tests">
+        <parameter name="OS" value="Win 10"></parameter>
         <parameter name="browser" value="firefox"></parameter>
         <classes>
             <class name="com.qascript.testCases.TC04_VerifyBottomProductCategories"></class>

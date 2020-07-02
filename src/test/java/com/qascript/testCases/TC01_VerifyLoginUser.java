@@ -4,7 +4,6 @@ import com.qascript.BaseClass;
 import com.qascript.pageObjects.HomePage;
 import com.qascript.pageObjects.LoginPage;
 import com.qascript.utils.Common.PropertyFileUtils;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class TC01_VerifyLoginUser extends BaseClass {
